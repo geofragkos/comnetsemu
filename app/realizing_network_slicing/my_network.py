@@ -46,14 +46,20 @@ if __name__ == "__main__":
     topo = NetworkSlicingTopo()
     net = Mininet(
         topo=topo,
+        # We specify an external controller by passing the Controller object in the Mininet constructor
+        # This was added in Mininet 2.2.0 and above.
+        controller=RemoteController( 'c0', ip='127.0.0.1', port=6633), 
         switch=OVSKernelSwitch,
         build=False,
         autoSetMacs=True,
         autoStaticArp=True,
         link=TCLink,
     )
-    controller = RemoteController("c1", ip="127.0.0.1", port=6633)
-    net.addController(controller)
+    
+    # ------------ Not needed for our project ~ Check Constructor for Controller ----------------- #
+    #controller = RemoteController("c1", ip="127.0.0.1", port=6633)
+    #net.addController(controller)
+    
     net.build()
     net.start()
     CLI(net)
