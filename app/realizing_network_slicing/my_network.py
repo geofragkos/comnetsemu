@@ -14,8 +14,7 @@ class NetworkSlicingTopo(Topo):
 
         # Create template host, switch, and link
         host_config = dict(inNamespace=True)
-        link1_config = dict(bw=5)  # Total Capacity of the 1st link ~ 5Mbps
-        link2_config = dict(bw=5)  # Total Capacity of the 2nd link ~ 5Mbps
+        link_config = dict(bw=10)  # Total Capacity of the link ~ 10Mbps
         host_link_config = dict()
 
         # Create router nodes ~ 2 router nodes in our case
@@ -30,8 +29,7 @@ class NetworkSlicingTopo(Topo):
 
 
         # Add router link
-        self.addLink("r1", "r2", **link1_config)
-        self.addLink("r1", "r2", **link2_config)
+        self.addLink("r1", "r2", **link_config)
 
         # Add clients-router1 links
         self.addLink("h1", "r1", **host_link_config)
